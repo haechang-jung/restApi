@@ -2,28 +2,31 @@ package test.restapi.demorestapi.events;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
-@Builder @AllArgsConstructor @NoArgsConstructor
-@Getter @Setter @EqualsAndHashCode(of = "id")
-@Entity
-public class Event {
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
+public class EventDto {
 
-    @Id @GeneratedValue
-    private Integer id;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String description;
+    @NonNull
     private LocalDateTime beginEnrollmentDateTime;
+    @NonNull
     private LocalDateTime closeEnrollmentDateTime;
+    @NonNull
     private LocalDateTime beginEventDateTime;
+    @NonNull
     private LocalDateTime endEventDateTime;
     private String location; // (optional) 이게 없으면 온라인 모임
+    @Min(0)
     private int basePrice; // (optional)
+    @Min(0)
     private int maxPrice; // (optional)
+    @Min(0)
     private int limitOfEnrollment;
-    private boolean offline;
-    private boolean free;
-    @Enumerated(EnumType.STRING)
-    private EventStatus eventStatus = EventStatus.DRAFT;
+
 }
